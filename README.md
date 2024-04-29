@@ -1,4 +1,4 @@
-# **WebScraper**
+# **WebScraper**⛏️
 
 ## Setup
 
