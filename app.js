@@ -36,19 +36,19 @@ async function getData(keyword) {
     //Localizing all properties of products by attributes and classes
     products = []
     product = 'div[data-asin] span.a-price-symbol';
-    priceSymbol = 'div[data-asin] span.a-price-symbol';
     priceWhole = 'div[data-asin] span.a-price-whole';
     priceFraction = 'div[data-asin] span.a-price-fraction';
     title = 'div[data-asin] div[data-cy="title-recipe"]'
     stars = 'div[data-asin] span.a-icon-alt'
-    reviews = 'div[data-asin] span[data-component-type="s-client-side-analytics"]'
+    reviews = 'div[data-asin] div[data-csa-c-content-id="alf-customer-ratings-count-component"]'
     img = 'div[data-asin] img.s-image'
 
     //Iterating through all products
     $(product).forEach(function (e, i){
 
         //Fetching data from html tags
-        productPrice = $(priceSymbol).item(i).textContent + $(priceWhole).item(i).textContent + $(priceFraction).item(i).textContent 
+        productId = 'https://www.amazon.com' + $('div[data-asin] span[data-component-type="s-product-image"] .a-link-normal').item(i).getAttribute('href')
+        productPrice = Number($(priceWhole).item(i).textContent + $(priceFraction).item(i).textContent )
         productTitle = $(title).item(i).textContent
         productImage = $(img).item(i).getAttribute('src')
         //Exceptions for null properties
@@ -63,20 +63,40 @@ async function getData(keyword) {
             productReviews = "No reviews found"
         }
 
+        starsMatches = productStars.match(/\d+/g)
+        reviewsMatches = productReviews.match(/\d+/g)
+        if (starsMatches){
+            starsMatches.pop()
+            productStars = Number(starsMatches.join('.'))
+        }
+        if (reviewsMatches){
+            productReviews = Number(productReviews.replace(',', ''))
+        }
         
+        costBenefitRate = ((productStars * productReviews) / productPrice)
+        if (isNaN(costBenefitRate) || costBenefitRate === null || productPrice === 0 ){
+            costBenefitRate = 0;
+        }
         //Pushing and formatting products to array
-        products.push([{"title":productTitle}, {"price": productPrice} , {"stars": productStars}, {"reviews": productReviews}, {"img": productImage}])
+        products.push({"id": productId,"title":productTitle, "price": productPrice , "stars": productStars, "reviews": productReviews, "img": productImage, "benefit": costBenefitRate})
         
     })
+   test = products.map(( a) => (a.benefit))
+   test2 = products.map((a) => (a))
+
+   max = Math.max(...test)
+   a = test2.find(x => x.benefit === max);
+  console.log('\n'+a.id)
     
 }
 
 //API Endpoint with JSON
 app.get('/api/scrape',(req,res) => {
     res.json(products)
+
 })
 
 //Calling function using keyword
-getData('abacate');
+getData('jacket');
 
 
