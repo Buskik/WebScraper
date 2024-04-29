@@ -7,4 +7,4 @@
 2. Run app
 > node app
 
-### Made by _Buskik_ with ♡
+**Made by _Buskik_ with ♡**
