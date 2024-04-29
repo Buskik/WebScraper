@@ -63,6 +63,7 @@ async function getData(keyword) {
             productReviews = "No reviews found"
         }
 
+        //Parsing and formatting strings to numbers
         starsMatches = productStars.match(/\d+/g)
         reviewsMatches = productReviews.match(/\d+/g)
         if (starsMatches){
@@ -73,7 +74,10 @@ async function getData(keyword) {
             productReviews = Number(productReviews.replace(',', ''))
         }
         
+        //Calculating the cost-benefit rate of each product
         costBenefitRate = ((productStars * productReviews) / productPrice)
+
+        //Handling exceptions (when it is sponsored product or have null properties)
         if (isNaN(costBenefitRate) || costBenefitRate === null || productPrice === 0 ){
             costBenefitRate = 0;
         }
@@ -81,12 +85,16 @@ async function getData(keyword) {
         products.push({"id": productId,"title":productTitle, "price": productPrice , "stars": productStars, "reviews": productReviews, "img": productImage, "benefit": costBenefitRate})
         
     })
+
+    //Testing manipulating data in products array
    test = products.map(( a) => (a.benefit))
    test2 = products.map((a) => (a))
 
+
+   //Calculating best choice
    max = Math.max(...test)
    a = test2.find(x => x.benefit === max);
-  console.log('\n'+a.id)
+   console.log('\n'+a.id)
     
 }
 
