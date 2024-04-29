@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Buskik",
   "license": "ISC",
-  "description": ""
+  "description": "Simple webscraper for Amazon search page."
 }
