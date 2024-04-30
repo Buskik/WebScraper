@@ -22,6 +22,11 @@ npm i
 ```
 node app
 ```
+3. Open localhost in browser
+```
+http://localhost:3000/ (html page)
+http://localhost:3000/api/scrape //API Endpoint
+```
 
 ### Dependencies
 > Express.js, Axios, JSDOM.
