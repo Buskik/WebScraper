@@ -47,10 +47,12 @@ async function getData(keyword) {
     $(product).forEach(function (e, i){
 
         //Fetching data from html tags
-        productId = 'https://www.amazon.com' + $('div[data-asin] span[data-component-type="s-product-image"] .a-link-normal').item(i).getAttribute('href')
+        productId = 'https://www.amazon.com' + $('div[data-asin] div[data-cy="title-recipe"] .a-link-normal').item(i).getAttribute('href')
         productPrice = Number($(priceWhole).item(i).textContent + $(priceFraction).item(i).textContent )
         productTitle = $(title).item(i).textContent
         productImage = $(img).item(i).getAttribute('src')
+
+       
         //Exceptions for null properties
         if  ($(stars).item(i) != null){
             productStars = $(stars).item(i).textContent
@@ -77,7 +79,7 @@ async function getData(keyword) {
         //Calculating the cost-benefit rate of each product
         costBenefitRate = ((productStars * productReviews) / productPrice)
 
-        //Handling exceptions (when it is sponsored product or have null properties)
+        //Handling exceptions (null properties)
         if (isNaN(costBenefitRate) || costBenefitRate === null || productPrice === 0 ){
             costBenefitRate = 0;
         }
@@ -100,11 +102,14 @@ async function getData(keyword) {
 
 //API Endpoint with JSON
 app.get('/api/scrape',(req,res) => {
-    res.json(products)
-
+    async function scrape() {
+       await getData(req.query.keyword)
+       res.json(products)
+    }
+    scrape()
 })
 
 //Calling function using keyword
-getData('jacket');
+
 
 
