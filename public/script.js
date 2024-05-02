@@ -1,6 +1,11 @@
 search = () =>{
-    
 
+    
+                grid = document.querySelector('.grid')
+                grid.innerHTML = ''
+                //Loading message
+                loading = document.querySelector('.loading')
+                loading.style.display = "flex"
     //Getting keyword from input
     keyword = document.querySelector('.search').value
 
@@ -14,7 +19,7 @@ search = () =>{
             best = products.find(e => e.benefit === bestBenefit)
 
 
-            //Mapping
+            //Mapping best choice
             grid = document.querySelector('.grid')
             product = document.createElement("a")
             productContainer = document.createElement("div")
@@ -91,7 +96,7 @@ search = () =>{
             product.appendChild(productContainer)
             productContainer.appendChild(price)
             grid.appendChild(product)
-            loading.style.opacity = '0'
+            loading.style.display = 'none'
         })}).catch(error => console.log('ERROR'))
 }
 
@@ -111,15 +116,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
               document.querySelector('.btn').click();
 
                   //Cleaning grid
-    grid = document.querySelector('.grid')
-    grid.innerHTML = ''
-    //Cleaning input
-    input.value = ""
+                    grid = document.querySelector('.grid')
+                    grid.innerHTML = ''
+                    //Cleaning input
 
-    //Loading message
-    loading = document.querySelector('.loading')
-    loading.style.display = "flex"
-    
+                //Loading message
+                loading = document.querySelector('.loading')
+                loading.style.display = "flex"
+                
 
               
             }
