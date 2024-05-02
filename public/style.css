@@ -73,6 +73,9 @@ footer {
     color: white;
     font-weight: bold;
 }
+footer a{
+    color: #FCE39D;
+}
 
 .loading {
     margin: 0;
