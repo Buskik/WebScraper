@@ -1,11 +1,63 @@
-
-
 search = () =>{
+    
+
+    //Getting keyword from input
     keyword = document.querySelector('.search').value
 
-
+    //Fetching scrape API
     fetch(`/api/scrape/?keyword=${keyword}`)
-        .then(res => res.json()).then(data => data.forEach((e, i) => {
+        .then(res => res.json()).then(data => {
+            //Selecting best choice based on cost-benefit rate
+            products = data.map((e) => e)
+            productsBenefit = data.map((e) => e.benefit)
+            bestBenefit = Math.max(...productsBenefit)
+            best = products.find(e => e.benefit === bestBenefit)
+
+
+            //Mapping
+            grid = document.querySelector('.grid')
+            product = document.createElement("a")
+            productContainer = document.createElement("div")
+            reviewContainer = document.createElement("div")
+            priceContainer = document.createElement("div")
+            product.classList.add('best')
+            productContainer.classList.add('productContainer')
+            reviewContainer.classList.add('reviewContainer')
+            priceContainer.classList.add('priceContainer')
+            product.href = best.id
+            title = document.createElement('h1')
+            title.innerHTML = best.title
+            img = document.createElement("img")
+            img.src = best.img
+            img.classList.add('productImg')
+            price = document.createElement('h2')
+            price.innerHTML = '$' + best.price
+            text = document.createElement('h2')
+            text.innerHTML = 'Best Choice!'
+            stars = document.createElement('h3')
+            stars.innerHTML = best.stars
+            starImg = document.createElement('img')
+            starImg.classList.add('starImg')
+            starImg.src = 'https://www.svgrepo.com/show/513511/star.svg'
+            reviews = document.createElement('h3')
+            reviews.innerHTML = best.reviews + ' reviews'
+            
+
+            product.appendChild(img)
+            priceContainer.appendChild(price)
+            priceContainer.appendChild(text)
+            productContainer.appendChild(title)
+            reviewContainer.appendChild(stars)
+            stars.appendChild(starImg)
+            reviewContainer.appendChild(reviews)
+            productContainer.appendChild(reviewContainer)
+            product.appendChild(productContainer)
+            productContainer.appendChild(priceContainer)
+            grid.appendChild(product)
+
+
+            data.forEach((e, i) => {
+            //Creating and Selecting HTML elements
             grid = document.querySelector('.grid')
             product = document.createElement("a")
             productContainer = document.createElement("div")
@@ -29,7 +81,7 @@ search = () =>{
             reviews = document.createElement('h3')
             reviews.innerHTML = e.reviews + ' reviews'
 
-
+            //Mapping products on grid
             product.appendChild(img)
             productContainer.appendChild(title)
             reviewContainer.appendChild(stars)
@@ -39,8 +91,8 @@ search = () =>{
             product.appendChild(productContainer)
             productContainer.appendChild(price)
             grid.appendChild(product)
-            loading.remove()
-        })).catch(error => console.log('ERROR'))
+            loading.style.opacity = '0'
+        })}).catch(error => console.log('ERROR'))
 }
 
 
@@ -55,18 +107,21 @@ window.addEventListener("DOMContentLoaded", (event) => {
             if (event.key === "Enter") {
               // Cancel the default action, if needed
               event.preventDefault();
-              grid = document.querySelector('.grid')
-
-              
-            grid.innerHTML = ''
               // Trigger the button element with a click
               document.querySelector('.btn').click();
-              
-              input.value = ""
 
-              loading = document.createElement('h1')
-              loading.innerHTML = 'Loading...'
-              grid.appendChild(loading)
+                  //Cleaning grid
+    grid = document.querySelector('.grid')
+    grid.innerHTML = ''
+    //Cleaning input
+    input.value = ""
+
+    //Loading message
+    loading = document.querySelector('.loading')
+    loading.style.display = "flex"
+    
+
+              
             }
           });
     }

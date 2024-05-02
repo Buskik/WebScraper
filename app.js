@@ -89,14 +89,7 @@ async function getData(keyword) {
     })
 
     //Testing manipulating data in products array
-   test = products.map(( a) => (a.benefit))
-   test2 = products.map((a) => (a))
-
-
-   //Calculating best choice
-   max = Math.max(...test)
-   a = test2.find(x => x.benefit === max);
-   console.log('\n'+a.id)
+   
     
 }
 

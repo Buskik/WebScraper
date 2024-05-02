@@ -61,6 +61,66 @@ header img {
     margin-left: 0.2rem;
 }
 
+.loading {
+    margin: 0;
+    display: flex;
+    color: #BA7620;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    align-self: center;
+    display: none;
+    left: 0;
+    right: 0;
+}
+.loading1 {
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    animation: loop 1s;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes loop {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(20deg);}
+    
+  }
+
+.best {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem 1rem;
+    height: auto;
+    margin: 0 5rem;
+    background-color: #FFFDF2;
+    border-radius: 0.5rem;
+    border: #FCE39D 1px solid;
+    transition: background-color ease-in-out 0.5s;
+}
+.best:hover {
+    background-color: #FFF3C8;
+    transition: background-color ease-in-out 0.5s;
+}
+.best .productContainer h2 {
+    color: #BA7620;
+
+}
+.best .reviewContainer{
+    color: #2463B2;
+}
+.priceContainer {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1rem;
+}
+
 .product {
     display: flex;
     flex-direction: row;
