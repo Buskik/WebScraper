@@ -2,18 +2,6 @@
     "version": 2,
     "env": {
     },
-    "builds": [
-      {
-        "src": "app.js",
-        "use": "@vercel/node",
-        "config": { "includeFiles": ["/**"] }
-      },
-      {
-        "src": "public/**",
-        "use": "@vercel/static",
-        "config": { "includeFiles": ["public/**"] }
-      }
-    ],
     "routes": [
       {
         "src": "/(.*)",
