@@ -9,5 +9,5 @@
       },
       {
         "src": "/",
-        "dest": "public/index.html"
+        "dest": "/public/index.html"
       }]}
