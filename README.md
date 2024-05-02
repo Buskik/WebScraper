@@ -9,7 +9,7 @@
 
 </h1>
  <p align="center">
-<img width="200px" height="200px" src="https://www.svgrepo.com/show/506966/com-laptop-code.svg">
+<img width="200px" height="200px" src="./public/logo.svg">
 </p>
 <h2> Setup </h2>
  
@@ -24,7 +24,7 @@ node app
 ```
 3. Open localhost in browser
 ```
-http://localhost:3000/ (html page)
+http://localhost:3000/ //HTML page
 http://localhost:3000/api/scrape //API Endpoint
 ```
 
