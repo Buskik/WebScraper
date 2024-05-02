@@ -75,6 +75,7 @@ footer {
 }
 footer a{
     color: #FCE39D;
+    text-decoration: underline;
 }
 
 .loading {
